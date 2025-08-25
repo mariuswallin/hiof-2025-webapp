@@ -1,0 +1,19 @@
+{
+	"name": "server-json",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "Server json example",
+	"scripts": {
+		"dev:frontend": "vite",
+		"dev:server": "node --watch server.js",
+		"dev": "concurrently -n frontend,server -c green,blue \"npm run dev:frontend\" \"npm run dev:server\""
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.14.3",
+		"hono": "^4.7.11"
+	},
+	"devDependencies": {
+		"concurrently": "9.1.2",
+		"vite": "^6.3.5"
+	}
+}
