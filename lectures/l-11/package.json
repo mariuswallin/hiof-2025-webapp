@@ -10,7 +10,7 @@
   "private": true,
   "scripts": {
     "build": "vite build",
-    "dev": "NODE_ENV=${NODE_ENV:-development} vite dev",
+    "dev": "vite dev",
     "dev:init": "rw-scripts dev-init",
     "preview": "vite preview",
     "worker:run": "rw-scripts worker-run",
@@ -35,11 +35,13 @@
     "ohash": "^2.0.11",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "rwsdk": "0.2.0-alpha.10",
+    "rwsdk": "0.3.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "1.12.2",
+    "@cloudflare/workers-types": "^4.20250904.0",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",

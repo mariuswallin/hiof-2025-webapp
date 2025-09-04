@@ -10,7 +10,7 @@
   "private": true,
   "scripts": {
     "build": "vite build",
-    "dev": "NODE_ENV=${NODE_ENV:-development} vite dev",
+    "dev": "vite dev",
     "dev:init": "rw-scripts dev-init",
     "preview": "vite preview",
     "worker:run": "rw-scripts worker-run",
@@ -34,7 +34,7 @@
     "lucide-react": "^0.536.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "rwsdk": "0.2.0-alpha.6",
+    "rwsdk": "0.3.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11"
   },

@@ -1,13 +1,18 @@
 import { defineConfig } from "vite";
-
 import { redwood } from "rwsdk/vite";
-import path from "node:path";
+import { fileURLToPath, URL } from "node:url";
+import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
-  plugins: [redwood()],
+  plugins: [
+    cloudflare({
+      viteEnvironment: { name: "worker" },
+    }),
+    redwood(),
+  ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 });
