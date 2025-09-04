@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "lions-kunst",
+  "name": "simple-start",
   "main": "src/worker.tsx",
   "compatibility_date": "2024-09-23",
   "compatibility_flags": [
@@ -17,7 +17,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "lions-kunst",
+      "database_name": "simple-start",
       "database_id": "__change_me__",
       "migrations_dir": "drizzle"
     }
@@ -25,7 +25,7 @@
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "lions-kunst"
+      "bucket_name": "simple-start"
     },
   ]
 }

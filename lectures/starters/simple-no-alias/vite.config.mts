@@ -1,11 +1,6 @@
 import { defineConfig } from "vite";
 import { redwood } from "rwsdk/vite";
 import { cloudflare } from "@cloudflare/vite-plugin";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [
@@ -14,9 +9,4 @@ export default defineConfig({
     }),
     redwood(),
   ],
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "src"),
-    },
-  },
 });

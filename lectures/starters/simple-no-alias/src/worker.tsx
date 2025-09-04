@@ -1,6 +1,6 @@
 import { defineApp } from "rwsdk/worker";
 import { render, route } from "rwsdk/router";
-import { Document } from "@/app/Document";
+import { Document } from "./app/Document";
 
 import { setCommonHeaders } from "./app/headers";
 
