@@ -1,7 +1,9 @@
-export default function TaskFooter() {
+export default function TaskFooter({ text }: { text?: string }) {
   return (
     <footer>
-      <p>Task Manager &copy; {new Date().getFullYear()}</p>
+      <p>
+        {text || "Task Manager"} &copy; {new Date().getFullYear()}
+      </p>
     </footer>
   );
 }

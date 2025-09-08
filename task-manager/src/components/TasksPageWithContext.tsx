@@ -5,10 +5,10 @@ import { ErrorBoundary } from "react-error-boundary";
 import { TaskProvider } from "./TaskContext";
 import type { Task } from "./types";
 
-const delayFn = (ms: number) =>
+export const delayFn = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-const rejectFn = (ms: number) =>
+export const rejectFn = (ms: number) =>
   new Promise((_, reject) => setTimeout(() => reject(new Error("Failed")), ms));
 
 const getTodos = async (reject = false): Promise<Task[]> => {

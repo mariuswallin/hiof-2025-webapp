@@ -20,6 +20,8 @@ export default function TaskList({
     onRemoveTask(task);
   };
 
+  console.log(JSON.stringify(tasks, null, 2));
+
   return (
     <section>
       {form}
