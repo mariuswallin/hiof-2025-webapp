@@ -1,19 +1,19 @@
 "use client";
 
 import TaskItem, { type Task } from "./TaskItem";
-import TaskLogger from "./TaskLogger";
+import TaskAction from "./TaskAction";
 
 export default function TaskCard({
   task,
-  loggerFn,
+  actionFn,
 }: {
   task: Task;
-  loggerFn: (task: Task) => void;
+  actionFn: (task: Task) => void;
 }) {
   return (
     <section>
       <TaskItem task={task} />
-      <TaskLogger task={task} onTaskLog={loggerFn} />
+      <TaskAction task={task} onAction={actionFn} />
     </section>
   );
 }
