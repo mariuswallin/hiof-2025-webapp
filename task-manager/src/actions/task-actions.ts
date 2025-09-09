@@ -71,7 +71,8 @@ export async function createTaskTask(task: Task, reject = false) {
 export async function createTaskActionState(
   prevState: any,
   data: FormData,
-  reject = false
+  reject = false,
+  invalidData = false
 ) {
   "use server";
 
@@ -94,7 +95,7 @@ export async function createTaskActionState(
     };
 
     // Validere at dette er en Task og har riktig verdier
-    if (!isValidTask(validData)) {
+    if (!isValidTask(validData) || invalidData) {
       return {
         success: false,
         message: "Ugyldig taskdata",
@@ -104,17 +105,17 @@ export async function createTaskActionState(
     }
 
     // Lagre i database
-    const createdTask = await saveTask(validData);
+    await saveTask(validData);
     return {
       success: true,
       message: "Task oppdatert!",
-      fields: data,
+      fields: Object.fromEntries(data),
       data: [...prevState.data, validData],
     };
   } catch (error) {
     return {
       success: false,
-      message: "Kunne ikke oppdatere task",
+      message: "Kunne ikke lage task",
       fields: Object.fromEntries(data),
       data: prevState.data,
     };

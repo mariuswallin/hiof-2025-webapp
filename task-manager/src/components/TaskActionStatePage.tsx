@@ -47,17 +47,9 @@ export default function TaskActionStatePage() {
   );
 
   const handleTaskCreated = async (task: Task) => {
-    const taskData = {
-      ...task,
-      dueDate:
-        typeof task.dueDate === "string"
-          ? new Date(task.dueDate)
-          : task.dueDate,
-    };
-
     startTransition(async () => {
       try {
-        addOptimisticTasks(taskData);
+        addOptimisticTasks(task);
       } catch (error) {
         console.warn("Error creating task:", error);
       }
