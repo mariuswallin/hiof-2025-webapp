@@ -1,9 +1,6 @@
-import { delayFn, rejectFn } from "@/components/TasksPageWithContext";
 import type { Task } from "@/components/types";
 
 export async function saveTask(task: Task) {
-  await delayFn(2000);
-  await rejectFn(500);
   const mappedData = {
     title: task.name,
     description: task.description,

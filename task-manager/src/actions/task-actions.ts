@@ -1,12 +1,12 @@
 import type { Task } from "@/components/types";
 import { saveTask } from "./task";
+import { delayFn, rejectFn } from "@/components/TasksPageWithContext";
 
 const validations = {
   id: (value: string) => value.length > 0,
   name: (value: string) => value.length > 0,
   description: (value: string) => value.length > 0,
-  dueDate: (value: string) =>
-    new Date(value) && !isNaN(new Date(value).getTime()),
+  dueDate: (value: string) => !isNaN(new Date(value).getTime()),
   completed: (value: boolean) => typeof value === "boolean",
 };
 
@@ -55,10 +55,68 @@ export async function createTask(formData: FormData) {
   return data as Task;
 }
 
-export async function createTaskTask(task: Task) {
+export async function createTaskTask(task: Task, reject = false) {
   "use server";
+
+  await delayFn(2000);
+  if (reject) {
+    await rejectFn(500);
+  }
 
   // Lagre i database
   await saveTask(task);
   return task;
+}
+
+export async function createTaskActionState(
+  prevState: any,
+  data: FormData,
+  reject = false
+) {
+  "use server";
+
+  try {
+    await delayFn(2000);
+    if (reject) {
+      await rejectFn(500);
+    }
+
+    const name = data.get("name");
+    const description = data.get("description");
+    const dueDate = data.get("dueDate");
+
+    const validData = {
+      id: crypto.randomUUID(),
+      name,
+      description,
+      dueDate,
+      completed: false,
+    };
+
+    // Validere at dette er en Task og har riktig verdier
+    if (!isValidTask(validData)) {
+      return {
+        success: false,
+        message: "Ugyldig taskdata",
+        fields: Object.fromEntries(data),
+        data: prevState.data,
+      };
+    }
+
+    // Lagre i database
+    const createdTask = await saveTask(validData);
+    return {
+      success: true,
+      message: "Task oppdatert!",
+      fields: data,
+      data: [...prevState.data, validData],
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Kunne ikke oppdatere task",
+      fields: Object.fromEntries(data),
+      data: prevState.data,
+    };
+  }
 }

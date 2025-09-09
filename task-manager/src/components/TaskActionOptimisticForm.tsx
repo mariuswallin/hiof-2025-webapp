@@ -2,6 +2,7 @@
 
 import { isValidTask } from "@/actions/task-actions";
 import type { Task } from "./types";
+import { TaskSubmitButton } from "./TaskSubmitButton";
 
 interface TaskActionFormProps {
   onTaskCreated: (task: Task) => void | Promise<void>;
@@ -28,7 +29,7 @@ export default function TaskActionOptimisticForm({
       <input name="name" type="text" placeholder="Task name" required />
       <textarea name="description" placeholder="Beskrivelse" />
       <input name="dueDate" type="date" placeholder="Forfallsdato" required />
-      <button type="submit">Opprett task</button>
+      <TaskSubmitButton />
     </form>
   );
 }
