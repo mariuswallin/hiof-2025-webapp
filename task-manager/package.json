@@ -19,18 +19,29 @@
     "release": "npm run clean && npm run build && wrangler deploy"
   },
   "dependencies": {
-    "lucide-react": "^0.542.0",
+    "react": "19.2.0-canary-3fb190f7-20250908",
+    "react-dom": "19.2.0-canary-3fb190f7-20250908",
+    "react-server-dom-webpack": "19.2.0-canary-3fb190f7-20250908",
+    "lucide-react": "^0.544.0",
     "react-error-boundary": "^6.0.0",
-    "rwsdk": "0.3.6"
+    "rwsdk": "1.0.0-alpha.4"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.12.3",
-    "@cloudflare/workers-types": "^4.20250906.0",
-    "@types/node": "^24.3.1",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.9",
+    "@cloudflare/vite-plugin": "1.12.4",
+    "@cloudflare/workers-types": "^4.20250913.0",
+    "@types/node": "22.14.0",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
     "typescript": "^5.9.2",
-    "vite": "^6.2.6",
-    "wrangler": "^4.34.0"
+    "babel-plugin-react-compiler": "19.1.0-rc.3",
+    "vite": "^7.1.5",
+    "wrangler": "4.35.0"
+  },
+   "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ]
   }
 }

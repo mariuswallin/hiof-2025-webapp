@@ -16,6 +16,7 @@ import TaskModern from "./components/TaskSuspense";
 import TaskModernWithContext from "./components/TaskPageContext";
 import TaskActionPage from "./components/TaskActionPage";
 import TaskActionStatePage from "./components/TaskActionStatePage";
+import TaskFormWithHook from "./components/TaskFormHook";
 
 export interface Env {}
 
@@ -40,7 +41,8 @@ export default defineApp([
           {/* <TaskModern /> */}
           {/* <TaskModernWithContext /> */}
           {/* <TaskActionPage /> */}
-          <TaskActionStatePage />
+          <TaskFormWithHook />
+          {/* <TaskActionStatePage /> */}
         </div>
       );
     }),
