@@ -1,7 +1,9 @@
 # Stage 1: Build workerd
 FROM ubuntu:latest AS workerd-builder
+
 ARG WORKERD_VERSION=v1.20250917.0
 ARG TARGETARCH
+
 WORKDIR /workdir
 
 RUN apt-get update && apt-get install -y curl ca-certificates
@@ -45,26 +47,15 @@ COPY --from=workerd-builder /workdir/lib/* /lib/
 # Set workerd environment
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
-# Set working directory
 WORKDIR /app
 
-# Install pnpm globally
 RUN npm install -g pnpm
 
-# Copy package files (these are less likely to change frequently)
 COPY package*.json pnpm-lock.yaml* ./
 
-# Install dependencies
 RUN pnpm install
 RUN pnpm add vite --save-dev || npm install vite --save-dev
 
-# Don't copy source code here - it will be mounted as a volume
-
-# Run as root for development simplicity (Wrangler needs to write config files)
-# Note: This is acceptable for development environments
-
-# Expose port
 EXPOSE 5173
 
-# Start the application with host binding for Docker
-CMD ["pnpm", "run", "dev", "--host", "0.0.0.0"]
+CMD ["pnpm", "run", "dev"]
