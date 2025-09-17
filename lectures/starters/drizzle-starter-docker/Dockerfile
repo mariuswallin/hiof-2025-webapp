@@ -24,16 +24,17 @@ RUN mkdir lib && \
     cp /lib/*-linux-gnu/libdl.so.2 lib/libdl.so.2 2>/dev/null || cp /lib/*/libdl.so.2 lib/libdl.so.2 && \
     cp /lib/*-linux-gnu/librt.so.1 lib/librt.so.1 2>/dev/null || cp /lib/*/librt.so.1 lib/librt.so.1
 
-# Stage 2: Node.js application
+# Stage 2: Development Node.js application
 FROM node:22-slim
 
-# Install system dependencies
+# Install system dependencies including curl for health checks
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
         libc6 \
         libgcc-s1 \
-        libstdc++6 && \
+        libstdc++6 \
+        curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy workerd and its dependencies from builder stage
@@ -50,17 +51,20 @@ WORKDIR /app
 # Install pnpm globally
 RUN npm install -g pnpm
 
-# Copy package files
+# Copy package files (these are less likely to change frequently)
 COPY package*.json pnpm-lock.yaml* ./
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
+RUN pnpm add vite --save-dev || npm install vite --save-dev
 
-# Copy application code
-COPY . .
+# Don't copy source code here - it will be mounted as a volume
+
+# Run as root for development simplicity (Wrangler needs to write config files)
+# Note: This is acceptable for development environments
 
 # Expose port
 EXPOSE 5173
 
-# Start the application
-CMD ["pnpm", "run", "dev"]
+# Start the application with host binding for Docker
+CMD ["pnpm", "run", "dev", "--host", "0.0.0.0"]

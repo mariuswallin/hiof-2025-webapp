@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      # Mount source code for HMR
+      - .:/app
+      # Exclude node_modules to avoid conflicts between host and container
+      - /app/node_modules
+      # Optional: Mount package files separately if you want to persist installs
+      - node_modules_volume:/app/node_modules
+    environment:
+      - NODE_ENV=development
+      # Vite specific env vars for Docker
+      - VITE_HOST=0.0.0.0
+      - VITE_PORT=5173
+    stdin_open: true
+    tty: true
+    # Restart policy for development
+    restart: unless-stopped
+    # Optional: Add labels for organization
+    labels:
+      - "traefik.enable=false"
+    # Health check (optional)
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5173"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  node_modules_volume:

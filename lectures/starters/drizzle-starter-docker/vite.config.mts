@@ -31,7 +31,19 @@ export default defineConfig({
     },
   },
   server: {
-    host: "0.0.0.0",
+    host: "0.0.0.0", // Allow external connections (required for Docker)
     port: 5173,
+    strictPort: true, // Exit if port is already in use
+    hmr: {
+      // HMR configuration for Docker
+      port: 5173,
+      // If you're having issues with HMR, you can try:
+      // clientPort: 5173, // Use this if HMR doesn't work
+    },
+    watch: {
+      // Use polling for better file watching in Docker
+      usePolling: true,
+      interval: 1000, // Check for changes every second
+    },
   },
 });
