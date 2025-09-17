@@ -10,7 +10,6 @@ import { drizzle } from "drizzle-orm/d1";
 
 export interface Env {
   DB: D1Database;
-  MY_CONTAINER: DurableObjectNamespace;
 }
 
 export type AppContext = {
@@ -62,11 +61,5 @@ export default defineApp([
       },
       Home,
     ]),
-    route("/container/:id", async ({ ctx, request, params }) => {
-      const id = params.id;
-      const containerId = env.MY_CONTAINER.idFromName(`/container/${id}`);
-      const container = env.MY_CONTAINER.get(containerId);
-      return await container.fetch(request);
-    }),
   ]),
 ]);

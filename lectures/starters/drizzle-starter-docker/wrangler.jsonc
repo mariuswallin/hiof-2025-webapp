@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "simple-start",
-  "main": "src/index.ts",
+  "main": "src/worker.tsx",
   "compatibility_date": "2025-09-01",
   "compatibility_flags": [
     "nodejs_compat"
@@ -14,35 +14,12 @@
     "enabled": true
   },
   "vars": {},
-  "containers": [
-    {
-      "class_name": "MyContainer",
-      "image": "./Dockerfile",
-      "max_instances": 10
-    }
-  ],
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "simple-start",
       "database_id": "__change_me__",
       "migrations_dir": "drizzle"
-    }
-  ],
-  "durable_objects": {
-    "bindings": [
-      {
-        "class_name": "MyContainer",
-        "name": "MY_CONTAINER"
-      }
-    ]
-  },
-  "migrations": [
-    {
-      "new_sqlite_classes": [
-        "MyContainer"
-      ],
-      "tag": "v1"
     }
   ],
   "r2_buckets": [
