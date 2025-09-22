@@ -43,3 +43,18 @@ form {
     }
   }
 }
+
+.loading {
+  inset: 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+
+  .text {
+    padding: 2rem;
+    color: #fff;
+    font-size: 2.2rem;
+  }
+}
