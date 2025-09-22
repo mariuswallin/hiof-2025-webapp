@@ -24,7 +24,7 @@
     "react-server-dom-webpack": "19.2.0-canary-3fb190f7-20250908",
     "lucide-react": "^0.544.0",
     "react-error-boundary": "^6.0.0",
-    "rwsdk": "1.0.0-alpha.4"
+    "rwsdk": "1.0.0-alpha.8"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.12.4",

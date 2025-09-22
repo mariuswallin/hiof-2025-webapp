@@ -34,11 +34,11 @@
     "react": "19.2.0-canary-3fb190f7-20250908",
     "react-dom": "19.2.0-canary-3fb190f7-20250908",
     "react-server-dom-webpack": "19.2.0-canary-3fb190f7-20250908",
-    "rwsdk": "1.0.0-alpha.5",
+    "rwsdk": "1.0.0-alpha.8",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
     "ufo": "^1.6.1",
-    "zod": "^4.1.9"
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.12.4",
@@ -52,7 +52,14 @@
     "tsx": "^4.20.5",
     "tw-animate-css": "^1.3.8",
     "typescript": "^5.9.2",
-    "vite": "^7.1.5",
+    "vite": "^7.1.7",
     "wrangler": "4.35.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ]
   }
 }
