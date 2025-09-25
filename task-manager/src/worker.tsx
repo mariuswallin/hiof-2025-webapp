@@ -135,6 +135,7 @@ export default defineApp([
         </div>
       );
     }),
+    // !STUDENT Denne er viktig
     route("/tasks-demo", TaskContextPageDemo),
     route("/tasks", TaskApiPage),
     route("/tasks-rsc", TaskRSCPage),

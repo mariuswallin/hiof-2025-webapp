@@ -24,19 +24,17 @@
     "react-server-dom-webpack": "19.2.0-canary-d415fd3e-20250919",
     "lucide-react": "^0.544.0",
     "react-error-boundary": "^6.0.0",
-    "rwsdk": "1.0.0-alpha.11"
+    "rwsdk": "1.0.0-alpha.15"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.13.5",
-    "@cloudflare/workers-types": "^4.20250924.0",
-    "@types/node": "22.5.2",
-   "@types/react": "19.1.2",
+     "@cloudflare/vite-plugin": "1.13.3",
+    "@cloudflare/workers-types": "4.20250921.0",
+    "@types/node": "22.14.0",
+    "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "@vitejs/plugin-react": "^5.0.2",
-    "typescript": "^5.9.2",
-    "babel-plugin-react-compiler": "19.1.0-rc.3",
-    "vite": "^7.1.7",
-    "wrangler": "4.40.0"
+    "typescript": "5.8.3",
+    "vite": "7.1.6",
+    "wrangler": "4.38.0"
   },
    "pnpm": {
     "onlyBuiltDependencies": [
