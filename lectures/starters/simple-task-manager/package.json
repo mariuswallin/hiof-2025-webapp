@@ -27,14 +27,14 @@
     "rwsdk": "1.0.0-alpha.15"
   },
   "devDependencies": {
-     "@cloudflare/vite-plugin": "1.13.3",
+    "@cloudflare/vite-plugin": "1.13.3",
     "@cloudflare/workers-types": "4.20250921.0",
-    "@types/node": "22.14.0",
+    "@types/node": "24.5.2",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "typescript": "5.8.3",
-    "vite": "7.1.6",
-    "wrangler": "4.38.0"
+    "typescript": "5.9.2",
+    "vite": "7.1.7",
+    "wrangler": "4.40.0"
   },
    "pnpm": {
     "onlyBuiltDependencies": [
