@@ -20,6 +20,7 @@ import TaskFormWithHook from "./components/TaskFormHook";
 import TaskApiPage from "./components/Tasks/TaskApiPage";
 import TaskRSCSuspensePage from "./components/Tasks/TaskRSCSuspensePage";
 import TaskRSCPage from "./components/Tasks/TaskRSCPage";
+import TaskContextPageDemo from "./components/Tasks/TaskContextPageDemo";
 
 export interface Env {}
 
@@ -59,6 +60,12 @@ export const tasks: Task[] = [
 
 export default defineApp([
   setCommonHeaders(),
+  route("/api/tasks-simple", () => {
+    return new Response(JSON.stringify(tasks), {
+      headers: { "Content-Type": "application/json" },
+      status: 200,
+    });
+  }),
   route("/api/tasks", ({ request }) => {
     const { search, status } = Object.fromEntries(
       new URL(request.url).searchParams
@@ -128,6 +135,7 @@ export default defineApp([
         </div>
       );
     }),
+    route("/tasks-demo", TaskContextPageDemo),
     route("/tasks", TaskApiPage),
     route("/tasks-rsc", TaskRSCPage),
     route("/tasks-suspense", TaskRSCSuspensePage),

@@ -1,8 +1,7 @@
 "use client";
 
-import { createContext, Suspense, use, useState } from "react";
+import { createContext, use, useState } from "react";
 import type { Task } from "./types";
-import { ErrorBoundary } from "react-error-boundary";
 
 export interface TaskContext {
   tasks: Task[];
