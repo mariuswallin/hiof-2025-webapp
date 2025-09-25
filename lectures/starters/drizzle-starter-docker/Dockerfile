@@ -6,9 +6,14 @@ ARG TARGETARCH
 
 WORKDIR /workdir
 
-RUN apt-get update && apt-get install -y curl ca-certificates
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        curl \
+        ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
-# Download the correct workerd binary based on architecture
+RUN echo "Downloading workerd version ${WORKERD_VERSION} for architecture ${TARGETARCH}"
+
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
         curl -LO https://github.com/cloudflare/workerd/releases/download/${WORKERD_VERSION}/workerd-linux-64.gz && \
         gunzip workerd-linux-64.gz && mv workerd-linux-64 workerd; \
@@ -21,31 +26,16 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
 
 RUN chmod +x workerd
 
-# Copy required shared libraries
-RUN mkdir lib && \
-    cp /lib/*-linux-gnu/libdl.so.2 lib/libdl.so.2 2>/dev/null || cp /lib/*/libdl.so.2 lib/libdl.so.2 && \
-    cp /lib/*-linux-gnu/librt.so.1 lib/librt.so.1 2>/dev/null || cp /lib/*/librt.so.1 lib/librt.so.1
-
 # Stage 2: Development Node.js application
 FROM node:22-slim
 
-# Install system dependencies including curl for health checks
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
-        libc6 \
-        libgcc-s1 \
-        libstdc++6 \
         curl && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy workerd and its dependencies from builder stage
-COPY --from=workerd-builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=workerd-builder /workdir/workerd /usr/local/bin/workerd
-COPY --from=workerd-builder /workdir/lib/* /lib/
-
-# Set workerd environment
-ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 WORKDIR /app
 
@@ -53,8 +43,8 @@ RUN npm install -g pnpm
 
 COPY package*.json pnpm-lock.yaml* ./
 
-RUN pnpm install
-RUN pnpm add vite --save-dev || npm install vite --save-dev
+RUN pnpm install && \
+    pnpm add vite --save-dev
 
 EXPOSE 5173
 
