@@ -34,7 +34,7 @@
     "react": "19.2.0-canary-d415fd3e-20250919",
     "react-dom": "19.2.0-canary-d415fd3e-20250919",
     "react-server-dom-webpack": "19.2.0-canary-d415fd3e-20250919",
-    "rwsdk": "1.0.0-alpha.15",
+    "rwsdk": "1.0.0-alpha.19",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
     "ufo": "^1.6.1",
