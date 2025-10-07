@@ -1,62 +1,10 @@
-# Standard RedwoodSDK Starter
+# Simple starter
 
-This "standard starter" is the recommended implementation for RedwoodSDK. You get a Typescript project with:
+Bruk `pnpm install` for å installere avhengigheter.
+Deretter kan du bruke `pnpm dev` for å starte utviklingsserveren.
 
-- Vite
-- database (Prisma via D1)
-- Session Management (via DurableObjects)
-- Passkey authentication (Webauthn)
-- Storage (via R2)
+For å installere `pnpm`, se https://pnpm.io/installation.
 
-## Creating your project
+Alternativt (men har gitt flere bugs) kan du bruke `npm install` og `npm run dev`.
 
-```shell
-npx degit redwoodjs/sdk/starters/standard my-project-name
-cd my-project-name
-pnpm install
-```
-
-## Running the dev server
-
-```shell
-pnpm dev
-```
-
-Point your browser to the URL displayed in the terminal (e.g. `http://localhost:5173/`). You should see a "Hello World" message in your browser.
-
-## Deploying your app
-
-### Wrangler Setup
-
-Within your project's `wrangler.jsonc`:
-
-- Replace the `__change_me__` placeholders with a name for your application
-
-- Create a new D1 database:
-
-```shell
-npx wrangler d1 create my-project-db
-```
-
-Copy the database ID provided and paste it into your project's `wrangler.jsonc` file:
-
-```jsonc
-{
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "my-project-db",
-      "database_id": "your-database-id",
-    },
-  ],
-}
-```
-
-### Authentication Setup
-
-For authentication setup and configuration, including optional bot protection, see the [Authentication Documentation](https://docs.rwsdk.com/core/authentication).
-
-## Further Reading
-
-- [RedwoodSDK Documentation](https://docs.rwsdk.com/)
-- [Cloudflare Workers Secrets](https://developers.cloudflare.com/workers/runtime-apis/secrets/)
+Alternativt bruk Docker starteren som ligger i `drizzle-starter-docker`-mappen, se [README.md](../drizzle-starter-docker/README.md) for detaljer.

@@ -1,39 +1,25 @@
-# Stage 1: Build workerd
-FROM ubuntu:latest AS workerd-builder
+# Stage 1: Download workerd directly
+FROM alpine:latest AS workerd-builder
 
-ARG WORKERD_VERSION=v1.20251007.0
+ARG WORKERD_VERSION=v1.20251004.0
 ARG TARGETARCH
 
 WORKDIR /workdir
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        curl \
-        ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN echo "Downloading workerd version ${WORKERD_VERSION} for architecture ${TARGETARCH}"
-
+# Alpine already has curl
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
-        curl -LO https://github.com/cloudflare/workerd/releases/download/${WORKERD_VERSION}/workerd-linux-64.gz && \
+        wget https://github.com/cloudflare/workerd/releases/download/${WORKERD_VERSION}/workerd-linux-64.gz && \
         gunzip workerd-linux-64.gz && mv workerd-linux-64 workerd; \
     elif [ "${TARGETARCH}" = "arm64" ]; then \
-        curl -LO https://github.com/cloudflare/workerd/releases/download/${WORKERD_VERSION}/workerd-linux-arm64.gz && \
+        wget https://github.com/cloudflare/workerd/releases/download/${WORKERD_VERSION}/workerd-linux-arm64.gz && \
         gunzip workerd-linux-arm64.gz && mv workerd-linux-arm64 workerd; \
     else \
         echo "Unsupported architecture: ${TARGETARCH}" && exit 1; \
-    fi
+    fi && \
+    chmod +x workerd
 
-RUN chmod +x workerd
-
-# Stage 2: Development Node.js application
+# Stage 2: Use node image (curl is already included)
 FROM node:22-slim
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        ca-certificates \
-        curl && \
-    rm -rf /var/lib/apt/lists/*
 
 COPY --from=workerd-builder /workdir/workerd /usr/local/bin/workerd
 
