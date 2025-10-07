@@ -1,7 +1,7 @@
 # Stage 1: Build workerd
 FROM ubuntu:latest AS workerd-builder
 
-ARG WORKERD_VERSION=v1.20250917.0
+ARG WORKERD_VERSION=v1.20251007.0
 ARG TARGETARCH
 
 WORKDIR /workdir
