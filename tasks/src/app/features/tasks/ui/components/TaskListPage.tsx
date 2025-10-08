@@ -1,8 +1,8 @@
 "use client";
 
 import { use } from "react";
-import { TaskList } from "./components/TaskList";
-import type { TaskDTO } from "../tasksService";
+import { TaskList } from "./TaskList";
+import type { TaskDTO } from "../../tasksService";
 import type { Result } from "@/app/types/result";
 
 export default function TaskListPage({

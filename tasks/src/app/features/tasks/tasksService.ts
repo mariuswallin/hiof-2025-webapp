@@ -80,9 +80,13 @@ function mapTaskToDTO(task: TaskWithUser): TaskDTO {
   };
 }
 
+const delayFn = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 export function createTaskService(taskRepository: TaskRepository): TaskService {
   return {
     async list(params?: TaskQuery) {
+      await delayFn(2000); // Simulerer nettverksforsinkelse
       const result = await taskRepository.findMany(params);
 
       if (!result.success) {
